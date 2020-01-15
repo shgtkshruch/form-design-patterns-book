@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled'
 import './App.css';
+import Validator from './Validator';
 
 const PageContent = styled.div`
   padding: 40px 20px;
@@ -100,19 +101,54 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
+  const [errors, setErrors] = useState([]);
 
   function revealPassword(e) {
     setHidePassword(!hidePassword);
   }
 
+  const validator = new Validator();
+  validator.add(
+    {
+      key: 'email',
+      valid() {
+        return email.length > 0
+      },
+      errorMessage: 'メールアドレスを入力してください',
+    }
+  );
+  validator.add(
+    {
+      key: 'email',
+      valid() {
+        return email.includes('@')
+      },
+      errorMessage: '@を入れてください',
+    },
+  );
+  validator.add(
+    {
+      key: 'password',
+      valid() {
+        return password.length > 8;
+      },
+      errorMessage: '８文字以上入力してください'
+    }
+  );
+
   function handleSubmit(e) {
-    console.log(email, password);
     e.preventDefault();
+    setErrors([]);
+
+    if (validator.invalid()) {
+      setErrors(validator.errorMessages());
+    }
   }
 
   return (
     <PageContent>
       <H1>登録フォーム</H1>
+      {errors.map((error, i) => (<p key={i}>{error.message}</p>))}
       <form noValidate onSubmit={(e) => handleSubmit(e)}>
         <Field>
           <Label htmlFor="email">
