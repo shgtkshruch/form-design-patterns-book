@@ -109,7 +109,7 @@ function App() {
         <FieldHint>数字と大文字をそれぞれ１文字以上含めて、８文字以上入力して下さい。</FieldHint>
         <PasswordRevealer>
           <InputPassword type={hidePassword ? 'password' : 'text'} id="password" name="password" />
-          <RevealButton type="button" onClick={revealPassword}>
+          <RevealButton type="button" onClick={revealPassword} aria-pressed={hidePassword ? false : true}>
             {hidePassword ? '表示する' : '隠す'}
           </RevealButton>
         </PasswordRevealer>
