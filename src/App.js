@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled'
 import './App.css';
 
@@ -46,13 +46,42 @@ const Input = styled.input`
   border: 2px solid #222;
 `;
 
+const PasswordRevealer = styled.div`
+  position: relative;
+`;
+
 const InputPassword = styled(Input)`
+  padding-right: 70px;
+
   ::-ms-reveal {
     display: none;
   }
 `;
 
+const RevealButton = styled.button`
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  width: 80px;
+  padding: 8px 0;
+  border: none;
+  border-radius: 0;
+  appearance: none;
+  font-size: 1em;
+  background-color: #fff;
+  color: #222;
+  font: inherit;
+  line-height: 1.5625;
+`;
+
 function App() {
+  const [hidePassword, setHidePassword] = useState(true);
+
+  function revealPassword(e) {
+    setHidePassword(!hidePassword);
+  }
+
   return (
     <PageContent>
       <H1>登録フォーム</H1>
@@ -68,7 +97,12 @@ function App() {
           <FieldLabel>パスワード</FieldLabel>
         </Label>
         <FieldHint>数字と大文字をそれぞれ１文字以上含めて、８文字以上入力して下さい。</FieldHint>
-        <InputPassword type="password" id="password" name="password" />
+        <PasswordRevealer>
+          <InputPassword type={hidePassword ? 'password' : 'text'} id="password" name="password" />
+          <RevealButton type="button" onClick={revealPassword}>
+            {hidePassword ? '表示する' : '隠す'}
+          </RevealButton>
+        </PasswordRevealer>
       </Field>
     </PageContent>
   );
