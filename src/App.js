@@ -95,25 +95,27 @@ function App() {
   return (
     <PageContent>
       <H1>登録フォーム</H1>
-      <Field>
-        <Label htmlFor="email">
-          <FieldLabel>メールアドレス</FieldLabel>
-        </Label>
-        <Input type="email" id="email" name="email" />
-      </Field>
+      <form noValidate>
+        <Field>
+          <Label htmlFor="email">
+            <FieldLabel>メールアドレス</FieldLabel>
+          </Label>
+          <Input type="email" id="email" name="email" />
+        </Field>
 
-      <Field>
-        <Label htmlFor="password">
-          <FieldLabel>パスワード</FieldLabel>
-        </Label>
-        <FieldHint>数字と大文字をそれぞれ１文字以上含めて、８文字以上入力して下さい。</FieldHint>
-        <PasswordRevealer>
-          <InputPassword type={hidePassword ? 'password' : 'text'} id="password" name="password" />
-          <RevealButton type="button" onClick={revealPassword} aria-pressed={hidePassword ? false : true}>
-            {hidePassword ? '表示する' : '隠す'}
-          </RevealButton>
-        </PasswordRevealer>
-      </Field>
+        <Field>
+          <Label htmlFor="password">
+            <FieldLabel>パスワード</FieldLabel>
+          </Label>
+          <FieldHint>数字と大文字をそれぞれ１文字以上含めて、８文字以上入力して下さい。</FieldHint>
+          <PasswordRevealer>
+            <InputPassword type={hidePassword ? 'password' : 'text'} id="password" name="password" />
+            <RevealButton type="button" onClick={revealPassword} aria-pressed={hidePassword ? false : true}>
+              {hidePassword ? '表示する' : '隠す'}
+            </RevealButton>
+          </PasswordRevealer>
+        </Field>
+      </form>
     </PageContent>
   );
 }
