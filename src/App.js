@@ -44,6 +44,11 @@ const Input = styled.input`
   box-sizing: border-box;
   appearance: none;
   border: 2px solid #222;
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 1px 4px #ffbf47;
+  }
 `;
 
 const PasswordRevealer = styled.div`
@@ -73,6 +78,11 @@ const RevealButton = styled.button`
   color: #222;
   font: inherit;
   line-height: 1.5625;
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 1px 4px #ffbf47;
+  }
 `;
 
 function App() {
