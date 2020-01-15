@@ -85,22 +85,40 @@ const RevealButton = styled.button`
   }
 `;
 
+const Submit = styled.input`
+  padding: 10px 20px;
+  border: none;
+  background-color: #0074d9;
+  color: #fff;
+  font: inherit;
+  font-size: 1em;
+  line-height: 1.5625;
+  appearance: none;
+`;
+
 function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
 
   function revealPassword(e) {
     setHidePassword(!hidePassword);
   }
 
+  function handleSubmit(e) {
+    console.log(email, password);
+    e.preventDefault();
+  }
+
   return (
     <PageContent>
       <H1>登録フォーム</H1>
-      <form noValidate>
+      <form noValidate onSubmit={(e) => handleSubmit(e)}>
         <Field>
           <Label htmlFor="email">
             <FieldLabel>メールアドレス</FieldLabel>
           </Label>
-          <Input type="email" id="email" name="email" />
+          <Input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </Field>
 
         <Field>
@@ -109,12 +127,19 @@ function App() {
           </Label>
           <FieldHint>数字と大文字をそれぞれ１文字以上含めて、８文字以上入力して下さい。</FieldHint>
           <PasswordRevealer>
-            <InputPassword type={hidePassword ? 'password' : 'text'} id="password" name="password" />
+            <InputPassword
+              type={hidePassword ? 'password' : 'text'}
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <RevealButton type="button" onClick={revealPassword} aria-pressed={hidePassword ? false : true}>
               {hidePassword ? '表示する' : '隠す'}
             </RevealButton>
           </PasswordRevealer>
         </Field>
+        <Submit type="submit" value="登録する" />
       </form>
     </PageContent>
   );
