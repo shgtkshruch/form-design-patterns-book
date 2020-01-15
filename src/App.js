@@ -46,6 +46,12 @@ const Input = styled.input`
   border: 2px solid #222;
 `;
 
+const InputPassword = styled(Input)`
+  ::-ms-reveal {
+    display: none;
+  }
+`;
+
 function App() {
   return (
     <PageContent>
@@ -62,7 +68,7 @@ function App() {
           <FieldLabel>パスワード</FieldLabel>
         </Label>
         <FieldHint>数字と大文字をそれぞれ１文字以上含めて、８文字以上入力して下さい。</FieldHint>
-        <Input type="password" id="password" name="password" />
+        <InputPassword type="password" id="password" name="password" />
       </Field>
     </PageContent>
   );
