@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Validator from '../Validator';
 import H1 from './H1';
-import PageContent from './PageContent';
 import Field from './Field';
 import Label from './Lable';
 import FieldLabel from './FieldLabel';
@@ -73,7 +72,7 @@ export default () => {
   }
 
   return (
-    <PageContent>
+    <>
       <ErrorSummary errors={errors} />
       <H1>登録フォーム</H1>
       <form noValidate onSubmit={(e) => handleSubmit(e)}>
@@ -100,6 +99,6 @@ export default () => {
         </Field>
         <Submit type="submit" value="登録する" />
       </form>
-    </PageContent>
+    </>
   );
 }
