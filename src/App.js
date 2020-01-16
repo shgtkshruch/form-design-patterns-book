@@ -97,6 +97,32 @@ const Submit = styled.input`
   appearance: none;
 `;
 
+const ErrorSummary = styled.div`
+  max-width: 40em;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 4px solid #b00f1f;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
+    color: #b00f1f;
+    font-size: 1.125em;
+    line-height: 1.38889;
+  }
+
+  a {
+    color: #b00f1f;
+    font-weight: 700;
+  }
+`;
+
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -147,8 +173,19 @@ function App() {
 
   return (
     <PageContent>
+      {errors.length > 0 &&
+        <ErrorSummary>
+          <h2>問題があります</h2>
+          <ul>
+            {errors.map((error, i) => (
+              <li key={i}>
+                <a href={`#${error.key}`}>{error.message}</a>
+              </li>
+            ))}
+          </ul>
+        </ErrorSummary>
+      }
       <H1>登録フォーム</H1>
-      {errors.map((error, i) => (<p key={i}>{error.message}</p>))}
       <form noValidate onSubmit={(e) => handleSubmit(e)}>
         <Field>
           <Label htmlFor="email">
