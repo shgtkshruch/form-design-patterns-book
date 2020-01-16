@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import Validator from '../Validator';
 import H1 from './H1';
 import PageContent from './PageContent';
@@ -18,7 +18,6 @@ export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState(new Validator().errors);
-  const refContainer = useRef(null);
 
   const validator = new Validator();
 
@@ -73,25 +72,9 @@ export default () => {
     }
   }
 
-  useEffect(() => {
-    // focus error summary element if inputted values are invalid
-    if (refContainer.current) refContainer.current.focus();
-  }, [errors])
-
   return (
     <PageContent>
-      {errors.count() > 0 &&
-        <ErrorSummary tabIndex="-1" ref={refContainer}>
-          <h2>問題があります</h2>
-          <ul>
-            {errors.all().map((error, i) => (
-              <li key={i}>
-                <a href={`#${error.key}`}>{error.message}</a>
-              </li>
-            ))}
-          </ul>
-        </ErrorSummary>
-      }
+      <ErrorSummary errors={errors} />
       <H1>登録フォーム</H1>
       <form noValidate onSubmit={(e) => handleSubmit(e)}>
         <Field>
