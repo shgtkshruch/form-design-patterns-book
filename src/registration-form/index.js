@@ -7,9 +7,7 @@ import Label from './Lable';
 import FieldLabel from './FieldLabel';
 import FieldHint from './FieldHint';
 import Input from './Input';
-import PasswordRevealer from './Password-Revealer';
 import InputPassword from './Input-Password';
-import RevealButton from './Reveal-Button';
 import Submit from './Submit';
 import ErrorSummary from './Error-Summary';
 import FieldError from './Field-Error';
@@ -19,7 +17,6 @@ let originalTitle = document.title;
 export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [hidePassword, setHidePassword] = useState(true);
   const [errors, setErrors] = useState(new Validator().errors);
   const refContainer = useRef(null);
 
@@ -64,10 +61,6 @@ export default () => {
 
   let emailErrorMessage = errors.getMessage('email');
   let passwordErrorMessage = errors.getMessage('password');
-
-  function revealPassword(e) {
-    setHidePassword(!hidePassword);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -129,18 +122,12 @@ export default () => {
               </FieldError>
             }
           </Label>
-          <PasswordRevealer>
-            <InputPassword
-              type={hidePassword ? 'password' : 'text'}
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <RevealButton type="button" onClick={revealPassword} aria-pressed={hidePassword ? false : true}>
-              {hidePassword ? '表示する' : '隠す'}
-            </RevealButton>
-          </PasswordRevealer>
+          <InputPassword
+            id="password"
+            name="password"
+            value={password}
+            handleChange={password => setPassword(password)}
+          />
         </Field>
         <Submit type="submit" value="登録する" />
       </form>
