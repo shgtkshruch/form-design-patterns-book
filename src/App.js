@@ -210,6 +210,7 @@ function App() {
   }
 
   useEffect(() => {
+    // focus error summary element if inputted values are invalid
     if (refContainer.current) refContainer.current.focus();
   }, [errors])
 
