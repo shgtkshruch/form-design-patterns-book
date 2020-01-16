@@ -128,6 +128,8 @@ const ErrorSummary = styled.div`
   }
 `;
 
+let originalTitle = document.title;
+
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -173,7 +175,9 @@ function App() {
     setErrors([]);
 
     if (validator.invalid()) {
-      setErrors(validator.errorMessages());
+      const errors = validator.errorMessages();
+      setErrors(errors);
+      document.title = `(${errors.length}件のエラー) - ${originalTitle}`;
     }
   }
 
