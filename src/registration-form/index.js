@@ -80,14 +80,7 @@ export default () => {
         <Field>
           <Label htmlFor="email">
             <FieldLabel>メールアドレス</FieldLabel>
-             {emailErrorMessage &&
-              <FieldError>
-                <svg width="1.3em" height="1.3em">
-                  <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#error-icon"></use>
-                </svg>
-                <span>{emailErrorMessage}</span>
-              </FieldError>
-            }
+            <FieldError message={emailErrorMessage} />
           </Label>
           <Input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </Field>
@@ -96,14 +89,7 @@ export default () => {
           <Label htmlFor="password">
             <FieldLabel>パスワード</FieldLabel>
             <FieldHint>数字と大文字をそれぞれ1文字以上含めて、8文字以上入力して下さい。</FieldHint>
-            {passwordErrorMessage &&
-              <FieldError>
-                <svg width="1.3em" height="1.3em">
-                  <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#error-icon"></use>
-                </svg>
-                <span>{passwordErrorMessage}</span>
-              </FieldError>
-            }
+            <FieldError message={passwordErrorMessage} />
           </Label>
           <InputPassword
             id="password"

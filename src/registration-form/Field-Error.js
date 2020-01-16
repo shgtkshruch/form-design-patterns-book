@@ -1,6 +1,7 @@
+import React from 'react';
 import styled from '@emotion/styled';
 
-export default styled.span`
+const FieldError = styled.span`
   display: block;
   margin-bottom: 10px;
   color: #b00f1f;
@@ -14,3 +15,16 @@ export default styled.span`
     vertical-align: bottom;
   }
 `;
+
+export default ({ message }) => (
+  <>
+    {message &&
+      <FieldError>
+        <svg width="1.3em" height="1.3em">
+          <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#error-icon"></use>
+        </svg>
+        <span>{message}</span>
+      </FieldError>
+    }
+  </>
+);
