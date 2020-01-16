@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8ff22d7c-544a-40ac-91df-e022f9b381a0/deploy-status)](https://app.netlify.com/sites/form-design-patterns-book/deploys)
+
+# Form Desing Patterns Book Smaple
+
+Coding sample of [Form Design Patterns Book](https://form-design-patterns.netlify.com/) by React.
+
+https://form-design-patterns-book.netlify.com/
 
 ## Available Scripts
 
