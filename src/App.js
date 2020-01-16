@@ -128,27 +128,39 @@ const ErrorSummary = styled.div`
   }
 `;
 
+const FieldError = styled.span`
+  display: block;
+  margin-bottom: 10px;
+  color: #b00f1f;
+  font-weight: 700;
+
+  svg {
+    width: 1.5625em;
+    margin-top: 5px;
+    margin-right: 5px;
+    fill: #b00f1f;
+    vertical-align: bottom;
+  }
+`
+
 let originalTitle = document.title;
 
 function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(new Validator().errors);
   const refContainer = useRef(null);
 
-  function revealPassword(e) {
-    setHidePassword(!hidePassword);
-  }
-
   const validator = new Validator();
+
   validator.add(
     {
       key: 'email',
       valid() {
         return email.length > 0
       },
-      errorMessage: 'メールアドレスを入力してください',
+      errorMessage: 'メールアドレスを入力してください。',
     }
   );
   validator.add(
@@ -157,8 +169,17 @@ function App() {
       valid() {
         return email.includes('@')
       },
-      errorMessage: '@を入れてください',
+      errorMessage: '@を入れてください。',
     },
+  );
+  validator.add(
+    {
+      key: 'password',
+      valid() {
+        return password.length > 0;
+      },
+      errorMessage: 'パスワードを入力してください。'
+    }
   );
   validator.add(
     {
@@ -166,18 +187,25 @@ function App() {
       valid() {
         return password.length > 8;
       },
-      errorMessage: '８文字以上入力してください'
+      errorMessage: 'パスワードには8文字以上が必要です。'
     }
   );
 
+  let emailErrorMessage = errors.getMessage('email');
+  let passwordErrorMessage = errors.getMessage('password');
+
+  function revealPassword(e) {
+    setHidePassword(!hidePassword);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    setErrors([]);
+    setErrors(new Validator().errors);
 
     if (validator.invalid()) {
       const errors = validator.errorMessages();
       setErrors(errors);
-      document.title = `(${errors.length}件のエラー) - ${originalTitle}`;
+      document.title = `(${errors.count()}件のエラー) - ${originalTitle}`;
     }
   }
 
@@ -187,11 +215,11 @@ function App() {
 
   return (
     <PageContent>
-      {errors.length > 0 &&
+      {errors.count() > 0 &&
         <ErrorSummary tabIndex="-1" ref={refContainer}>
           <h2>問題があります</h2>
           <ul>
-            {errors.map((error, i) => (
+            {errors.all().map((error, i) => (
               <li key={i}>
                 <a href={`#${error.key}`}>{error.message}</a>
               </li>
@@ -204,6 +232,14 @@ function App() {
         <Field>
           <Label htmlFor="email">
             <FieldLabel>メールアドレス</FieldLabel>
+             {emailErrorMessage &&
+              <FieldError>
+                <svg width="1.3em" height="1.3em">
+                  <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#error-icon"></use>
+                </svg>
+                <span>{emailErrorMessage}</span>
+              </FieldError>
+            }
           </Label>
           <Input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </Field>
@@ -211,8 +247,16 @@ function App() {
         <Field>
           <Label htmlFor="password">
             <FieldLabel>パスワード</FieldLabel>
+            <FieldHint>数字と大文字をそれぞれ1文字以上含めて、8文字以上入力して下さい。</FieldHint>
+            {passwordErrorMessage &&
+              <FieldError>
+                <svg width="1.3em" height="1.3em">
+                  <use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#error-icon"></use>
+                </svg>
+                <span>{passwordErrorMessage}</span>
+              </FieldError>
+            }
           </Label>
-          <FieldHint>数字と大文字をそれぞれ１文字以上含めて、８文字以上入力して下さい。</FieldHint>
           <PasswordRevealer>
             <InputPassword
               type={hidePassword ? 'password' : 'text'}
