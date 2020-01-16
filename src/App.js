@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled'
 import './App.css';
 import Validator from './Validator';
@@ -103,6 +103,11 @@ const ErrorSummary = styled.div`
   margin-bottom: 20px;
   border: 4px solid #b00f1f;
 
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 1px 4px #ffbf47;
+  }
+
   h2 {
     margin-top: 0;
     margin-bottom: 10px;
@@ -128,6 +133,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
   const [errors, setErrors] = useState([]);
+  const refContainer = useRef(null);
 
   function revealPassword(e) {
     setHidePassword(!hidePassword);
@@ -171,10 +177,14 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    if (refContainer.current) refContainer.current.focus();
+  }, [errors])
+
   return (
     <PageContent>
       {errors.length > 0 &&
-        <ErrorSummary>
+        <ErrorSummary tabIndex="-1" ref={refContainer}>
           <h2>問題があります</h2>
           <ul>
             {errors.map((error, i) => (
