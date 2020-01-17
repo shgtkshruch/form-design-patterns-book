@@ -28,7 +28,7 @@ export default () => {
     <>
       <H1>支払いフォーム</H1>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <Field as="fieldset">
+        <Field>
           <Legend>配送オプション</Legend>
           <Radio
             name="option"

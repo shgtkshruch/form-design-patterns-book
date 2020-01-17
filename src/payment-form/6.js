@@ -4,12 +4,14 @@ import { jsx, css } from '@emotion/core';
 import Validator from '../Validator';
 import H1 from '../components/H1';
 import Field from '../components/Field';
+import Legend from '../components/Legend';
 import Label from '../components/Lable';
 import FieldLabel from '../components/Field-Label';
 import FieldHint from '../components/Field-Hint';
 import FieldError from '../components/Field-Error';
 import ErrorSummary from '../components/Error-Summary';
 import Input from '../components/Input';
+import Checkbox from '../components/Checkbox';
 import Submit from '../components/Submit';
 
 import {
@@ -25,6 +27,10 @@ export default () => {
   const [cardnumber, setCardnumber] = useState('');
   const [expiry, setExpiry] = useState('');
   const [cvc, setCvc] = useState('');
+  const [same, setSame] = useState(false);
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [postcode, setPostcode] = useState('');
   const [errors, setErrors] = useState(new Validator().errors);
 
   let history = useHistory();
@@ -57,10 +63,32 @@ export default () => {
       errorMessage: 'セキュリティコードを入力してください。',
     }
   );
+  validator.add(
+    {
+      key: 'address1',
+      valid() {
+        if (!same) return true
+        return address1.length > 0
+      },
+      errorMessage: '住所を入力してください。',
+    }
+  );
+  validator.add(
+    {
+      key: 'postcode',
+      valid() {
+        if (!same) return true
+        return postcode.length > 0
+      },
+      errorMessage: '郵便番号を入力してください。',
+    }
+  );
 
   let cardnumberErrorMessage = errors.getMessage('cardnumber');
   let expiryErrorMessage = errors.getMessage('expiry');
   let cvcErrorMessage = errors.getMessage('cvc');
+  let address1ErrorMessage = errors.getMessage('address1');
+  let postcodeErrorMessage = errors.getMessage('postcode');
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -133,6 +161,67 @@ export default () => {
             `}
           />
         </Field>
+
+        <Field>
+          <Legend>請求先住所</Legend>
+          <Checkbox
+            id="same"
+            name="same"
+            checked={same}
+            onChange={(e) => setSame(e.target.checked)}
+            text="請求先の住所は配送先と同じ"
+          />
+        </Field>
+
+        {same &&
+          <div>
+            <Field>
+              <Label htmlFor="address1">
+                <FieldLabel>住所1</FieldLabel>
+                <FieldError message={address1ErrorMessage} />
+              </Label>
+              <Input
+                type="text"
+                id="address1"
+                name="address1"
+                value={address1}
+                aria-invalid={address1ErrorMessage ? true : false}
+                onChange={(e) => setAddress1(e.target.value)}
+              />
+            </Field>
+
+            <Field>
+              <Label htmlFor="address2">
+                <FieldLabel>住所2（任意）</FieldLabel>
+              </Label>
+              <Input
+                type="text"
+                id="address2"
+                name="address2"
+                value={address2}
+                onChange={(e) => setAddress2(e.target.value)}
+              />
+            </Field>
+
+            <Field>
+              <Label htmlFor="postcode">
+                <FieldLabel>郵便番号</FieldLabel>
+                <FieldError message={postcodeErrorMessage} />
+              </Label>
+              <Input
+                type="text"
+                id="postcode"
+                name="postcode"
+                value={postcode}
+                aria-invalid={postcodeErrorMessage ? true : false}
+                onChange={(e) => setPostcode(e.target.value)}
+                css={css`
+                  width: 8em;
+                `}
+              />
+            </Field>
+          </div>
+        }
         <Submit type="submit" value="続ける" />
       </form>
     </>
