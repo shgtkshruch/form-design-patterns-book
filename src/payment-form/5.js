@@ -35,7 +35,7 @@ export default () => {
             id="notes"
             name="notes"
             value={notes}
-            maxLength={100}
+            max={100}
             onChange={(e) => setNotes(e.target.value)}
           />
         </Field>

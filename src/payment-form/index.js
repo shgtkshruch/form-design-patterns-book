@@ -21,16 +21,16 @@ const components = [
   Page6,
 ];
 
-export default () => {
-  return (
-    <Router>
-      <Route exact path="/payment-form">
-        <Redirect to="/payment-form/1" />
-      </Route>
+const path = `/payment-form`;
 
-      {components.map((component, i) => (
-        <Route key={i} path={`/payment-form/${i+1}`} component={component} />
-      ))}
-    </Router>
-  )
-}
+export default () => (
+  <Router>
+    <Route exact path={path}>
+      <Redirect to={`${path}/1`} />
+    </Route>
+    {components.map((component, i) => (
+      <Route key={i} path={`${path}/${i+1}`} component={component} />
+    ))}
+  </Router>
+)
+

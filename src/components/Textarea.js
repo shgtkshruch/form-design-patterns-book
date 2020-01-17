@@ -14,13 +14,13 @@ const styles = css`
 `;
 
 export default ({ ...props }) => {
-  const { value, maxLength } = props
+  const { value, max } = props
 
   return (
     <>
       <textarea css={styles} {...props} />
-      {maxLength &&
-        <div role="status" aria-live="polite">残り{maxLength - value.length}文字</div>
+      {max &&
+        <div role="status" aria-live="polite">残り{max - value.length}文字</div>
       }
     </>
   )
