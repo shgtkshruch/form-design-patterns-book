@@ -10,6 +10,7 @@ import Page2 from './2';
 import Page3 from './3';
 import Page4 from './4';
 import Page5 from './5';
+import Page6 from './6';
 
 const components = [
   Page1,
@@ -17,6 +18,7 @@ const components = [
   Page3,
   Page4,
   Page5,
+  Page6,
 ];
 
 export default () => {
