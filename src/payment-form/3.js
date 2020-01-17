@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
 import { jsx, css } from '@emotion/core';
+import { useRouteMatch, useHistory } from "react-router-dom";
+
 import Validator from '../Validator';
 import H1 from '../components/H1';
 import Input from '../components/Input';
@@ -10,11 +12,6 @@ import FieldLabel from '../components/Field-Label';
 import FieldError from '../components/Field-Error';
 import ErrorSummary from '../components/Error-Summary';
 import Submit from '../components/Submit';
-
-import {
-  useRouteMatch,
-  useHistory
-} from "react-router-dom";
 
 let originalTitle = document.title;
 

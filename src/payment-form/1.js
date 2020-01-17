@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useRouteMatch, useHistory } from "react-router-dom";
+
 import Validator from '../Validator';
 import H1 from '../components/H1';
 import Input from '../components/Input';
@@ -9,11 +11,6 @@ import FieldHint from '../components/Field-Hint';
 import FieldError from '../components/Field-Error';
 import ErrorSummary from '../components/Error-Summary';
 import Submit from '../components/Submit';
-
-import {
-  useRouteMatch,
-  useHistory
-} from "react-router-dom";
 
 let originalTitle = document.title;
 

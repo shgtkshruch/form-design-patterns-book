@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
+import { useRouteMatch, useHistory } from "react-router-dom";
+
 import H1 from '../components/H1';
 import Field from '../components/Field';
 import Legend from '../components/Legend';
 import Radio from '../components/Radio';
 import Submit from '../components/Submit';
-
-import {
-  useRouteMatch,
-  useHistory
-} from "react-router-dom";
-
 
 export default () => {
   const [option, setOption] = useState('standard');
