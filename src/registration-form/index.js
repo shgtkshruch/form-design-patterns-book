@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Validator from '../Validator';
-import H1 from './H1';
-import Field from './Field';
-import Label from './Lable';
-import FieldLabel from './FieldLabel';
-import FieldHint from './FieldHint';
-import Input from './Input';
-import InputPassword from './Input-Password';
-import Submit from './Submit';
-import ErrorSummary from './Error-Summary';
-import FieldError from './Field-Error';
+import H1 from '../components/H1';
+import Field from '../components/Field';
+import Label from '../components/Lable';
+import FieldLabel from '../components/FieldLabel';
+import FieldHint from '../components/FieldHint';
+import Input from '../components/Input';
+import InputPassword from '../components/Input-Password';
+import Submit from '../components/Submit';
+import ErrorSummary from '../components/Error-Summary';
+import FieldError from '../components/Field-Error';
 
 let originalTitle = document.title;
 

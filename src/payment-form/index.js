@@ -1,5 +1,6 @@
 import React from 'react';
+import H1 from '../components/H1';
 
 export default () => (
-  <h2>Payment Form</h2>
+  <H1>支払いフォーム</H1>
 );
