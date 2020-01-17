@@ -28,8 +28,8 @@ export default () => (
     `}>
       <Nav>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="registration-form" activeClassName="is-active">Registration Form</NavLink>
-        <NavLink to="payment-form" activeClassName="is-active">Payment Form</NavLink>
+        <NavLink to="/registration-form" activeClassName="is-active">Registration Form</NavLink>
+        <NavLink to="/payment-form" activeClassName="is-active">Payment Form</NavLink>
       </Nav>
       <div className="container">
         <Switch>
