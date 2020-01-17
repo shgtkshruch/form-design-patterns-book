@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import H1 from '../components/H1';
 import Field from '../components/Field';
 import Label from '../components/Lable';
-import FieldLabel from '../components/FieldLabel';
-import FieldHint from '../components/FieldHint';
+import FieldLabel from '../components/Field-Label';
+import FieldHint from '../components/Field-Hint';
 import FieldError from '../components/Field-Error';
 import Input from '../components/Input';
 
