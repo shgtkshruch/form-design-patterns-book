@@ -1,6 +1,7 @@
-import styled from '@emotion/styled'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 
-export default styled.input`
+const style = css`
   width: 100%;
   padding: 8px;
   font-size: 1em;
@@ -16,3 +17,4 @@ export default styled.input`
   }
 `;
 
+export default ({ ...props }) => <input css={style} {...props} />

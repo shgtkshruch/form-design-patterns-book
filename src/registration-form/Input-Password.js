@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { useState } from 'react';
 import styled from '@emotion/styled';
+import { jsx, css } from '@emotion/core';
 import Input from './Input';
 
 const PasswordRevealer = styled.div`
   position: relative;
 `;
 
-const InputPassword = styled(Input)`
+const inputStyle = css`
   padding-right: 70px;
 
   ::-ms-reveal {
@@ -36,17 +38,15 @@ const RevealButton = styled.button`
   }
 `;
 
-export default ({ id, name, value, handleChange }) => {
+export default ({ ...props }) => {
   const [hidePassword, setHidePassword] = useState(true);
 
   return (
     <PasswordRevealer>
-      <InputPassword
+      <Input
         type={hidePassword ? 'password' : 'text'}
-        id="password"
-        name="password"
-        value={value}
-        onChange={(e) => handleChange(e.target.value)}
+        css={inputStyle}
+        {...props}
       />
       <RevealButton
         type="button"

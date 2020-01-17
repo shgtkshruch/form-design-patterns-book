@@ -81,7 +81,14 @@ export default () => {
             <FieldLabel>メールアドレス</FieldLabel>
             <FieldError message={emailErrorMessage} />
           </Label>
-          <Input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            aria-invalid={emailErrorMessage ? true : false}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Field>
 
         <Field>
@@ -94,7 +101,8 @@ export default () => {
             id="password"
             name="password"
             value={password}
-            handleChange={password => setPassword(password)}
+            aria-invalid={passwordErrorMessage ? true : false}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Field>
         <Submit type="submit" value="登録する" />
