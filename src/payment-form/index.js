@@ -7,8 +7,13 @@ import {
 
 import Page1 from './1';
 import Page2 from './2';
+import Page3 from './3';
 
-const components = [Page1, Page2];
+const components = [
+  Page1,
+  Page2,
+  Page3
+];
 
 export default () => {
   return (

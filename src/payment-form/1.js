@@ -75,7 +75,7 @@ export default () => {
             id="email"
             name="email"
             value={email}
-            aria-invalid={false}
+            aria-invalid={emailErrorMessage ? true : false}
             onChange={(e) => setEmail(e.target.value)}
           />
         </Field>
