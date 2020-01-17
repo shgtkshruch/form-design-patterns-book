@@ -46,8 +46,8 @@ export default () => {
             labelText="プレミアム（€6 、翌日配送）"
             onChange={(e) => setOption(e.target.value)}
           />
-          <Submit type="submit" value="続ける" />
         </Field>
+        <Submit type="submit" value="続ける" />
       </form>
     </>
   )
