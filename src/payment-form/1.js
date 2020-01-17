@@ -17,11 +17,12 @@ import {
 
 let originalTitle = document.title;
 
-export default ({ props }) => {
+export default () => {
   const validator = new Validator();
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState(new Validator().errors);
   let history = useHistory();
+  let { path } = useRouteMatch();
 
   validator.add(
     {
@@ -41,8 +42,6 @@ export default ({ props }) => {
       errorMessage: '@を入れてください。',
     },
   );
-
-  let { path } = useRouteMatch();
 
   function handleSubmit(e) {
     e.preventDefault();
