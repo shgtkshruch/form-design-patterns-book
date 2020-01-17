@@ -6,7 +6,8 @@ import {
   Route,
   NavLink
 } from "react-router-dom";
-import RegistrationFrom from './registration-form';
+import RegistrationFrom from './registration-form/';
+import PaymentForm from './payment-form/';
 import Home from './Home';
 import Nav from './Nav';
 import './App.css';
@@ -28,11 +29,15 @@ export default () => (
       <Nav>
         <NavLink to="/">Home</NavLink>
         <NavLink to="registration-form" activeClassName="is-active">Registration Form</NavLink>
+        <NavLink to="payment-form" activeClassName="is-active">Payment Form</NavLink>
       </Nav>
       <div className="container">
         <Switch>
           <Route path="/registration-form">
             <RegistrationFrom />
+          </Route>
+          <Route path="/payment-form">
+            <PaymentForm />
           </Route>
           <Route path="/">
             <Home />
@@ -40,5 +45,5 @@ export default () => (
         </Switch>
       </div>
     </div>
-  </Router>
+ </Router>
 )
