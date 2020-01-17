@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import UseStateWithLocalStorage from '../components/Use-State-With-LocalStorage';
 import { useRouteMatch, useHistory } from "react-router-dom";
 
 import H1 from '../components/H1';
@@ -8,7 +9,7 @@ import Radio from '../components/Radio';
 import Submit from '../components/Submit';
 
 export default () => {
-  const [option, setOption] = useState('standard');
+  const [option, setOption] = UseStateWithLocalStorage('option', 'standard');
 
   let history = useHistory();
   let { path } = useRouteMatch();

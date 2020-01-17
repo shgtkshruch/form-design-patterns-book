@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import UseStateWithLocalStorage from '../components/Use-State-With-LocalStorage';
 import { useRouteMatch, useHistory } from "react-router-dom";
 
 import Validator from '../Validator';
@@ -16,7 +17,7 @@ let originalTitle = document.title;
 
 export default () => {
   const validator = new Validator();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = UseStateWithLocalStorage('email');
   const [errors, setErrors] = useState(new Validator().errors);
   let history = useHistory();
   let { path } = useRouteMatch();

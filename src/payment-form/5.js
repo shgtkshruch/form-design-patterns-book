@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import UseStateWithLocalStorage from '../components/Use-State-With-LocalStorage';
 import { useRouteMatch, useHistory } from "react-router-dom";
 
 import H1 from '../components/H1';
@@ -10,7 +11,7 @@ import Textarea from '../components/Textarea';
 import Submit from '../components/Submit';
 
 export default () => {
-  const [notes, setNotes] = useState('');
+  const [notes, setNotes] = UseStateWithLocalStorage('notes');
 
   let history = useHistory();
   let { path } = useRouteMatch();

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
+import UseStateWithLocalStorage from '../components/Use-State-With-LocalStorage';
 import { jsx, css } from '@emotion/core';
 import { useRouteMatch, useHistory } from "react-router-dom";
 
@@ -21,13 +22,13 @@ let originalTitle = document.title;
 export default () => {
   const validator = new Validator();
 
-  const [cardnumber, setCardnumber] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [cvc, setCvc] = useState('');
-  const [same, setSame] = useState(false);
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
-  const [postcode, setPostcode] = useState('');
+  const [cardnumber, setCardnumber] = UseStateWithLocalStorage('cardnumber');
+  const [expiry, setExpiry] = UseStateWithLocalStorage('expiry');
+  const [cvc, setCvc] = UseStateWithLocalStorage('cvc');
+  const [same, setSame] = UseStateWithLocalStorage('same');
+  const [address1, setAddress1] = UseStateWithLocalStorage('address1');
+  const [address2, setAddress2] = UseStateWithLocalStorage('address2');
+  const [postcode, setPostcode] = UseStateWithLocalStorage('postcode');
   const [errors, setErrors] = useState(new Validator().errors);
 
   let history = useHistory();
