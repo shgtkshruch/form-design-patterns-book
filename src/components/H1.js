@@ -7,4 +7,3 @@ export default styled.h1`
   font-size: 3.75em;
   line-height: 1;
 `;
-

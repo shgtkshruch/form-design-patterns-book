@@ -4,4 +4,3 @@ export default styled.span`
   display: block;
   font-weight: 700;
 `;
-

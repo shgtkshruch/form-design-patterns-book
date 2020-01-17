@@ -18,7 +18,7 @@ import {
 
 let originalTitle = document.title;
 
-export default ({ props }) => {
+export default () => {
   const validator = new Validator();
 
   const [address1, setAddress1] = useState('');
