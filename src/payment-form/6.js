@@ -25,10 +25,10 @@ export default () => {
   const [cardnumber, setCardnumber] = UseStateWithLocalStorage('cardnumber');
   const [expiry, setExpiry] = UseStateWithLocalStorage('expiry');
   const [cvc, setCvc] = UseStateWithLocalStorage('cvc');
-  const [same, setSame] = UseStateWithLocalStorage('same');
-  const [address1, setAddress1] = UseStateWithLocalStorage('address1');
-  const [address2, setAddress2] = UseStateWithLocalStorage('address2');
-  const [postcode, setPostcode] = UseStateWithLocalStorage('postcode');
+  const [same, setSame] = UseStateWithLocalStorage('same', true);
+  const [address1, setAddress1] = UseStateWithLocalStorage('billingAddress1');
+  const [address2, setAddress2] = UseStateWithLocalStorage('billingAaddress2');
+  const [postcode, setPostcode] = UseStateWithLocalStorage('billingPostcode');
   const [errors, setErrors] = useState(new Validator().errors);
 
   let history = useHistory();
@@ -65,7 +65,7 @@ export default () => {
     {
       key: 'address1',
       valid() {
-        if (!same) return true
+        if (same) return true
         return address1.length > 0
       },
       errorMessage: '住所を入力してください。',
@@ -75,7 +75,7 @@ export default () => {
     {
       key: 'postcode',
       valid() {
-        if (!same) return true
+        if (same) return true
         return postcode.length > 0
       },
       errorMessage: '郵便番号を入力してください。',
@@ -171,7 +171,7 @@ export default () => {
           />
         </Field>
 
-        {same &&
+        {!same &&
           <div>
             <Field>
               <Label htmlFor="address1">
