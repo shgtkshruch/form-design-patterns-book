@@ -3,12 +3,13 @@ import UseStateWithLocalStorage from '../components/Use-State-With-LocalStorage'
 import { useRouteMatch, useHistory } from "react-router-dom";
 
 import H1 from '../components/H1';
-import Input from '../components/Input';
 import Field from '../components/Field';
 import Label from '../components/Lable';
 import FieldLabel from '../components/Field-Label';
 import FieldHint from '../components/Field-Hint';
+import Input from '../components/Input';
 import Submit from '../components/Submit';
+import BackBtn from '../components/Back-Button';
 
 export default ({ props }) => {
   const [mobile, setMobile] = UseStateWithLocalStorage('mobile');
@@ -25,6 +26,7 @@ export default ({ props }) => {
   return (
     <>
       <H1>支払いフォーム</H1>
+      <BackBtn to={path.replace(/\d$/, 1)} text="戻る" />
       <form noValidate onSubmit={(e) => handleSubmit(e)}>
         <Field>
           <Label htmlFor="mobile">

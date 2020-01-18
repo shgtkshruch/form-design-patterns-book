@@ -8,6 +8,7 @@ import Label from '../components/Lable';
 import FieldLabel from '../components/Field-Label';
 import FieldHint from '../components/Field-Hint';
 import Textarea from '../components/Textarea';
+import BackBtn from '../components/Back-Button';
 import Submit from '../components/Submit';
 
 export default () => {
@@ -26,6 +27,7 @@ export default () => {
   return (
     <>
       <H1>支払いフォーム</H1>
+      <BackBtn to={path.replace(/\d$/, 4)} text="戻る" />
       <form onSubmit={(e) => handleSubmit(e)}>
         <Field>
           <Label htmlFor="notes">

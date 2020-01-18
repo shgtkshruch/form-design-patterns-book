@@ -6,6 +6,7 @@ import H1 from '../components/H1';
 import Field from '../components/Field';
 import Legend from '../components/Legend';
 import Radio from '../components/Radio';
+import BackBtn from '../components/Back-Button';
 import Submit from '../components/Submit';
 
 export default () => {
@@ -24,6 +25,7 @@ export default () => {
   return (
     <>
       <H1>支払いフォーム</H1>
+      <BackBtn to={path.replace(/\d$/, 3)} text="戻る" />
       <form onSubmit={(e) => handleSubmit(e)}>
         <Field>
           <Legend>配送オプション</Legend>

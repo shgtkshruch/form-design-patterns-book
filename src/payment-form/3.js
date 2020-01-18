@@ -12,6 +12,7 @@ import Label from '../components/Lable';
 import FieldLabel from '../components/Field-Label';
 import FieldError from '../components/Field-Error';
 import ErrorSummary from '../components/Error-Summary';
+import BackBtn from '../components/Back-Button';
 import Submit from '../components/Submit';
 
 let originalTitle = document.title;
@@ -78,6 +79,7 @@ export default () => {
     <>
       <ErrorSummary errors={errors} />
       <H1>支払いフォーム</H1>
+      <BackBtn to={path.replace(/\d$/, 2)} text="戻る" />
       <form noValidate onSubmit={(e) => handleSubmit(e)}>
 
         <Field>
