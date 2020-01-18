@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
+import UseStateWithLocalStorage from '../components/Use-State-With-LocalStorage';
+import { useRouteMatch, useHistory } from "react-router-dom";
+
 import Validator from '../Validator';
 import H1 from '../components/H1';
+import Input from '../components/Input';
 import Field from '../components/Field';
 import Label from '../components/Lable';
 import FieldLabel from '../components/Field-Label';
 import FieldHint from '../components/Field-Hint';
-import Input from '../components/Input';
-import InputPassword from '../components/Input-Password';
-import Submit from '../components/Submit';
-import ErrorSummary from '../components/Error-Summary';
 import FieldError from '../components/Field-Error';
+import ErrorSummary from '../components/Error-Summary';
+import Submit from '../components/Submit';
 
 let originalTitle = document.title;
 
 export default () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState(new Validator().errors);
-
   const validator = new Validator();
+  const [email, setEmail] = UseStateWithLocalStorage('email');
+  const [errors, setErrors] = useState(new Validator().errors);
+  let history = useHistory();
+  let { path } = useRouteMatch();
 
   validator.add(
     {
@@ -38,27 +40,6 @@ export default () => {
       errorMessage: '@を入れてください。',
     },
   );
-  validator.add(
-    {
-      key: 'password',
-      valid() {
-        return password.length > 0;
-      },
-      errorMessage: 'パスワードを入力してください。'
-    }
-  );
-  validator.add(
-    {
-      key: 'password',
-      valid() {
-        return password.length > 8;
-      },
-      errorMessage: 'パスワードには8文字以上が必要です。'
-    }
-  );
-
-  let emailErrorMessage = errors.getMessage('email');
-  let passwordErrorMessage = errors.getMessage('password');
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -68,17 +49,23 @@ export default () => {
       const errors = validator.errorMessages();
       setErrors(errors);
       document.title = `(${errors.count()}件のエラー) - ${originalTitle}`;
+    } else {
+      const nextPagePath = `${path.replace(/\d$/, 2)}`;
+      history.push(nextPagePath);
     }
   }
+
+  let emailErrorMessage = errors.getMessage('email');
 
   return (
     <>
       <ErrorSummary errors={errors} />
-      <H1>登録フォーム</H1>
+      <H1>支払いフォーム</H1>
       <form noValidate onSubmit={(e) => handleSubmit(e)}>
         <Field>
           <Label htmlFor="email">
             <FieldLabel>メールアドレス</FieldLabel>
+            <FieldHint>こちらにご注文の確認メールをお送りします。</FieldHint>
             <FieldError message={emailErrorMessage} />
           </Label>
           <Input
@@ -90,23 +77,8 @@ export default () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Field>
-
-        <Field>
-          <Label htmlFor="password">
-            <FieldLabel>パスワード</FieldLabel>
-            <FieldHint>数字と大文字をそれぞれ1文字以上含めて、8文字以上入力して下さい。</FieldHint>
-            <FieldError message={passwordErrorMessage} />
-          </Label>
-          <InputPassword
-            id="password"
-            name="password"
-            value={password}
-            aria-invalid={passwordErrorMessage ? true : false}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Field>
-        <Submit type="submit" value="登録する" />
+        <Submit type="submit" value="続ける" />
       </form>
     </>
-  );
+  )
 }
