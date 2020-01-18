@@ -11,6 +11,7 @@ import Page3 from './3';
 import Page4 from './4';
 import Page5 from './5';
 import Page6 from './6';
+import Page7 from './7';
 
 const components = [
   Page1,
@@ -19,6 +20,7 @@ const components = [
   Page4,
   Page5,
   Page6,
+  Page7,
 ];
 
 const path = `/payment-form`;
